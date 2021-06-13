@@ -15,20 +15,13 @@ class _InfoPracaViewState extends State<InfoPracaView> {
   @override
   Widget build(BuildContext context) {
     final _firestore = FirebaseFirestore.instance;
-    var id = ModalRoute.of(context)!.settings.arguments;
-    
+    var dadosPraca = ModalRoute.of(context)!.settings.arguments as Praca;
+
     return Scaffold(
-      appBar: StreamBuilder<QuerySnapshot>(
-        stream: _firestore
-                        .collection('praca')
-                        .where('id', isEqualTo: id)
-                        .snapshots(),
-                        builder: (_, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Text('Loading');
-                      })
-       return AppBar(
-          title: Text('',
+      appBar: AppBar(
+        title: Text(
+          '${dadosPraca.nome}',
+          // _firestore.collection("pracas").doc("${id}").toString(),
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
@@ -36,14 +29,14 @@ class _InfoPracaViewState extends State<InfoPracaView> {
       ),
       body: Column(
         children: [
-          Image.asset('assets/${id}_1.png'),
+          Image.asset('assets/${dadosPraca.id}_1.png'),
           SizedBox(
               height: 100,
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/addcomment', arguments: id);
+                  Navigator.of(context).pushNamed('/addcomment', arguments: dadosPraca.id);
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -63,12 +56,12 @@ class _InfoPracaViewState extends State<InfoPracaView> {
                 child: StreamBuilder<QuerySnapshot>(
                     stream: _firestore
                         .collection('comentarios')
-                        .where('praca', isEqualTo: id)
+                        .where('praca', isEqualTo: dadosPraca.id)
                         .orderBy('time', descending: true)
                         .snapshots(),
                     builder: (_, snapshot) {
                       if (!snapshot.hasData) {
-                        return Text('Loading');
+                        return Text('Ainda não há comentários para essa praça');
                       }
                       return ListView.builder(
                           itemCount: snapshot.data!.docs.length,

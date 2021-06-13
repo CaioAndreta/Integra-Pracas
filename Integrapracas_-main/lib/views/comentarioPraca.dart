@@ -31,7 +31,7 @@ class ComentarioPraca extends StatelessWidget {
                 Container(
                     alignment: Alignment.centerLeft, child: Text('Categoria')),
                 SizedBox(height: 3),
-                Categorias( ),
+                Categorias(),
                 SizedBox(height: 50),
                 Container(
                     alignment: Alignment.centerLeft, child: Text('Seu texto')),
@@ -48,11 +48,12 @@ class ComentarioPraca extends StatelessWidget {
                     onPressed: () {
                       db.collection('comentarios').add({
                         'usuario': user!.displayName,
-                        'categoria': Categorias ,
+                        'categoria': '',
                         'comentario': comentarioPraca.text,
                         'praca': id,
                         'time': DateTime.now()
                       });
+                      Navigator.pop(context);
                     }),
               ],
             ),

@@ -44,7 +44,7 @@ class LoginView extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.blue,
                           padding: EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 25)),
+                            horizontal: 40, vertical: 25)),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           realizaLogin(context);
@@ -54,7 +54,9 @@ class LoginView extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     GestureDetector(
-                        onTap: () => {},
+                        onTap: () => {
+                          Navigator.of(context).pushNamed('/redefinir-senha')
+                        },
                         child: Text('Esqueci minha senha',
                             style: TextStyle(
                                 color: Colors.grey.shade600,

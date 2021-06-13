@@ -8,9 +8,9 @@ class Praca {
   String endereco;
 
   Praca(
-      [this.id = '',
+      {this.id = '',
       this.capa = '',
       this.nome = '',
       this.localizacao = '',
-      this.endereco = '']);
+      this.endereco = ''});
 }

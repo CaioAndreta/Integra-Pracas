@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:integrapracas/models/praca.dart';
 import 'package:integrapracas/views/infoPraca.dart';
 import 'package:integrapracas/views/login.dart';
 import 'package:geolocator/geolocator.dart';
@@ -58,9 +59,10 @@ class _ListaPracasState extends State<ListaPracas> {
                       width: double.infinity,
                       child: GestureDetector(
                         onTap: () {
+                          var nomePraca = doc['nome'];
                           var idPraca = doc.id;
                           Navigator.of(context)
-                              .pushNamed('/comments', arguments: idPraca);
+                              .pushNamed('/comments', arguments: Praca(id: idPraca, nome: nomePraca));
                         },
                         child: Card(
                           elevation: 5,
@@ -105,6 +107,17 @@ class _ListaPracasState extends State<ListaPracas> {
                   });
             }));
   }
+}
+
+class Pra {
+  String id;
+  String nome;
+
+  get getId => this.id;
+
+  get getNome => this.nome;
+
+  Pra(this.id, this.nome);
 }
 
 class SideDrawer extends StatelessWidget {

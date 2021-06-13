@@ -1,15 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RedefinirSenha extends StatelessWidget {
-  const RedefinirSenha
-({ Key? key }) : super(key: key);
+  const RedefinirSenha({Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final redefineSenha = new TextEditingController();
+
     return Scaffold(
-       appBar: AppBar(
+        appBar: AppBar(
           centerTitle: true,
-          title: Text('Praças', style: TextStyle(color: Colors.black)),
+          title:
+              Text('Redefinir a Senha', style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.white,
           leading: BackButton(color: Colors.black),
         ),
@@ -17,23 +22,26 @@ class RedefinirSenha extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(50),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    alignment: Alignment.centerLeft, child: Text('Categoria')),
-                SizedBox(height: 3),
-                SizedBox(height: 50),
-                Container(
-                    alignment: Alignment.centerLeft, child: Text('Seu texto')),
-                SizedBox(height: 3),
+                    child: Text(
+                        'Insira o email da sua conta para redefinir a senha. Enviaremos uma confirmação para verificar se o dono da conta solicitou a mudança.')),
+                SizedBox(height: 8),
                 TextFormField(
-                    maxLines: 5,
-                    decoration: InputDecoration(border: OutlineInputBorder())),
-                SizedBox(height: 80),
+                    controller: redefineSenha,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(), hintText: 'Email')),
+                SizedBox(height: 50),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.blue, padding: EdgeInsets.all(30)),
-                    child: const Text('Adicionar Comentário'),
-                    onPressed: (){},),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue, padding: EdgeInsets.all(30)),
+                  child: const Text('Redefinir senha'),
+                  onPressed: () {
+                      
+                    }
+                  },
+                ),
               ],
             ),
           )
