@@ -54,10 +54,11 @@ class _InfoPracaViewState extends State<InfoPracaView> {
             child: Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child: StreamBuilder<QuerySnapshot>(
+                  
                     stream: _firestore
                         .collection('comentarios')
                         .where('praca', isEqualTo: dadosPraca.id)
-                        .orderBy('time', descending: true)
+                        //.orderBy('timestemp')
                         .snapshots(),
                     builder: (_, snapshot) {
                       if (!snapshot.hasData) {

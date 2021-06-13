@@ -38,13 +38,14 @@ class RedefinirSenha extends StatelessWidget {
                       primary: Colors.blue, padding: EdgeInsets.all(30)),
                   child: const Text('Redefinir senha'),
                   onPressed: () {
-                      
+                      firebaseAuth.sendPasswordResetEmail(email: redefineSenha.text.trim());
+                    },
+                    ),
+                    ],
+                    ),
+                    ),
+                    ],
+                    ),
+                    );
                     }
-                  },
-                ),
-              ],
-            ),
-          )
-        ]));
-  }
-}
+                    }

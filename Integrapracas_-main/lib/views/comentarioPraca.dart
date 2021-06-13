@@ -51,7 +51,7 @@ class ComentarioPraca extends StatelessWidget {
                         'categoria': '',
                         'comentario': comentarioPraca.text,
                         'praca': id,
-                        'time': DateTime.now()
+                        'timestamp': Timestamp.now()
                       });
                       Navigator.pop(context);
                     }),
