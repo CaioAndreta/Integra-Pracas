@@ -13,11 +13,4 @@ class Praca {
       this.nome = '',
       this.localizacao = '',
       this.endereco = '']);
-
-  getPraca() {
-    var db = FirebaseFirestore.instance;
-    var p = Praca();
-    p.id = db.collection('pracas').id;
-    p.id = db.collection('pracas').doc(p.id).get();
-  }
 }

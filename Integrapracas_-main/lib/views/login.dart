@@ -10,7 +10,6 @@ class LoginView extends StatelessWidget {
   final emailController = new TextEditingController();
   final senhaController = new TextEditingController();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     getLocalizacao() async {
@@ -55,7 +54,7 @@ class LoginView extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     GestureDetector(
-                        onTap: () => getLocalizacao(),
+                        onTap: () => {},
                         child: Text('Esqueci minha senha',
                             style: TextStyle(
                                 color: Colors.grey.shade600,
@@ -75,11 +74,7 @@ class LoginView extends StatelessWidget {
                         style: TextStyle(color: Colors.black87),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CadastroView()),
-                        );
+                        Navigator.of(context).pushNamed('/cadastro');
                       },
                     ),
                   ],
@@ -162,23 +157,9 @@ class LoginView extends StatelessWidget {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: emailController.text, password: senhaController.text);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => ListaPracas()));
+      Navigator.of(context).pushNamed('/pracas');
     } on FirebaseAuthException catch (e, s) {
       _handleFirebaseLoginWithCredentialsException(e, s);
     }
   }
-
-  // if (_firebaseAuth.currentUser == null) {
-  //   ScaffoldMessenger.of(context)
-  //     ..removeCurrentSnackBar()
-  //     ..showSnackBar(SnackBar(
-  //       content: Text("Email ou senha inválidos"),
-  //     ));
-  // } else {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => ListaPracas()),
-  //   );
-  // }
 }

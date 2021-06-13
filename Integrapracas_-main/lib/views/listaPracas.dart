@@ -24,6 +24,7 @@ class _ListaPracasState extends State<ListaPracas> {
     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
     return isLocationServiceEnabled;
   }
+
   @override
   Widget build(BuildContext context) {
     final _firestore = FirebaseFirestore.instance;
@@ -44,6 +45,9 @@ class _ListaPracasState extends State<ListaPracas> {
         body: StreamBuilder<QuerySnapshot>(
             stream: _firestore.collection('pracas').orderBy('nome').snapshots(),
             builder: (_, snapshot) {
+              if (!snapshot.hasData) {
+                return Text('Loading');
+              }
               return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (_, index) {
@@ -55,11 +59,8 @@ class _ListaPracasState extends State<ListaPracas> {
                       child: GestureDetector(
                         onTap: () {
                           var idPraca = doc.id;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => InfoPracaView(idPraca)),
-                          );
+                          Navigator.of(context)
+                              .pushNamed('/comments', arguments: idPraca);
                         },
                         child: Card(
                           elevation: 5,
@@ -145,8 +146,7 @@ class SideDrawer extends StatelessWidget {
             title: Text('Logout'),
             onTap: () async {
               await FirebaseAuth.instance.signOut();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginView()));
+              Navigator.of(context).pushNamed('/');
             },
           ),
         ],

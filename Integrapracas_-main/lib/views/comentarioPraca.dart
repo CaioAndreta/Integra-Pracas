@@ -14,7 +14,7 @@ class ComentarioPraca extends StatelessWidget {
     final user = auth.currentUser;
     var db = FirebaseFirestore.instance;
     var comentarioPraca = new TextEditingController();
-    
+    var id = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
         appBar: AppBar(
@@ -49,7 +49,9 @@ class ComentarioPraca extends StatelessWidget {
                       db.collection('comentarios').add({
                         'usuario': user!.displayName,
                         'categoria': '',
-                        'comentario': comentarioPraca.text
+                        'comentario': comentarioPraca.text,
+                        'praca': id,
+                        'time': DateTime.now()
                       });
                     }),
               ],

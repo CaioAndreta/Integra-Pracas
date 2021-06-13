@@ -21,7 +21,7 @@ class _CadastroViewState extends State<CadastroView> {
     await firebaseAuth.createUserWithEmailAndPassword(
         email: emailController.text, password: senhaController.text);
     final user = firebaseAuth.currentUser;
-    user!.updateDisplayName(usuarioController.text);
+    user!.updateDisplayName(usuarioController.text.toUpperCase());
   }
 
   @override
@@ -48,7 +48,7 @@ class _CadastroViewState extends State<CadastroView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InputNome(),
+                    InputNome(controller: usuarioController),
                     SizedBox(height: 10),
                     InputEmail(controller: emailController),
                     SizedBox(height: 10),
@@ -96,14 +96,18 @@ class _CadastroViewState extends State<CadastroView> {
               ..showSnackBar(SnackBar(
                 content: Text('Cadastro efetuado com sucesso!'),
               ));
+            Navigator.of(context).pushNamed('/');
           }
         });
   }
 }
 
 class InputNome extends StatefulWidget {
-  const InputNome({Key? key}) : super(key: key);
+  final TextEditingController controller;
 
+  const InputNome({Key? key,
+  required this.controller,})  : super(key: key);
+  
   @override
   _InputNomeState createState() => _InputNomeState();
 }
@@ -127,7 +131,7 @@ class _InputNomeState extends State<InputNome> {
                   }
                   return null;
                 },
-                controller: _CadastroViewState().usuarioController)),
+                controller: widget.controller)),
       ],
     );
   }
@@ -259,10 +263,7 @@ class BotaoVoltar extends StatelessWidget {
         style: TextStyle(color: Colors.black87),
       ),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginView()),
-        );
+        Navigator.of(context).pushNamed('/');
       },
     );
   }
