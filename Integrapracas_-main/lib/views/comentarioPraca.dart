@@ -31,7 +31,7 @@ class ComentarioPraca extends StatelessWidget {
                 Container(
                     alignment: Alignment.centerLeft, child: Text('Categoria')),
                 SizedBox(height: 3),
-                Categorias(value: ),
+                Categorias( ),
                 SizedBox(height: 50),
                 Container(
                     alignment: Alignment.centerLeft, child: Text('Seu texto')),
@@ -48,7 +48,7 @@ class ComentarioPraca extends StatelessWidget {
                     onPressed: () {
                       db.collection('comentarios').add({
                         'usuario': user!.displayName,
-                        'categoria': _CategoriasState().categoriaValue,
+                        'categoria': Categorias ,
                         'comentario': comentarioPraca.text,
                         'praca': id,
                         'time': DateTime.now()
@@ -62,17 +62,16 @@ class ComentarioPraca extends StatelessWidget {
 }
 
 class Categorias extends StatefulWidget {
-  final value;
-  const Categorias({Key? key, required this.value}) : super(key: key);
+  const Categorias({Key? key}) : super(key: key);
 
   @override
   _CategoriasState createState() => _CategoriasState();
 }
 
 class _CategoriasState extends State<Categorias> {
-  String? categoriaValue;
   @override
   Widget build(BuildContext context) {
+    String? categoriaValue;
     return DropdownButtonFormField<String>(
       value: categoriaValue,
       items: ["Manutenção", "Sugestão de Melhoria", "Evento"]
@@ -81,7 +80,7 @@ class _CategoriasState extends State<Categorias> {
                 value: label,
               ))
           .toList(),
-      onChanged: (String? value) {
+      onChanged: (value) {
         setState(() {
           categoriaValue = value!;
           print(categoriaValue);

@@ -16,12 +16,19 @@ class _InfoPracaViewState extends State<InfoPracaView> {
   Widget build(BuildContext context) {
     final _firestore = FirebaseFirestore.instance;
     var id = ModalRoute.of(context)!.settings.arguments;
-    var docPraca =
-        _firestore.collection('pracas').where('id', isEqualTo: id).snapshots();
+    
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '${docPraca}',
+      appBar: StreamBuilder<QuerySnapshot>(
+        stream: _firestore
+                        .collection('praca')
+                        .where('id', isEqualTo: id)
+                        .snapshots(),
+                        builder: (_, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Text('Loading');
+                      })
+       return AppBar(
+          title: Text('',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
