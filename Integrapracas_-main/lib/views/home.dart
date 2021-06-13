@@ -4,6 +4,7 @@ import 'package:integrapracas/views/comentarioPraca.dart';
 import 'package:integrapracas/views/infoPraca.dart';
 import 'package:integrapracas/views/listaPracas.dart';
 import 'package:integrapracas/views/login.dart';
+import 'package:integrapracas/views/redefSenha.dart';
 
 class App extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -12,6 +13,7 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => LoginView(),
         '/cadastro': (context) => CadastroView(),
+        '/redefinir-senha': (context) => RedefinirSenha(),
         '/pracas': (context) => ListaPracas(),
         '/addcomment': (context) => ComentarioPraca(),
         '/comments': (context) => InfoPracaView()

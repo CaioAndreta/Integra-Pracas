@@ -31,7 +31,7 @@ class ComentarioPraca extends StatelessWidget {
                 Container(
                     alignment: Alignment.centerLeft, child: Text('Categoria')),
                 SizedBox(height: 3),
-                Categorias(),
+                Categorias(value: ),
                 SizedBox(height: 50),
                 Container(
                     alignment: Alignment.centerLeft, child: Text('Seu texto')),
@@ -48,7 +48,7 @@ class ComentarioPraca extends StatelessWidget {
                     onPressed: () {
                       db.collection('comentarios').add({
                         'usuario': user!.displayName,
-                        'categoria': '',
+                        'categoria': _CategoriasState().categoriaValue,
                         'comentario': comentarioPraca.text,
                         'praca': id,
                         'time': DateTime.now()
@@ -62,23 +62,20 @@ class ComentarioPraca extends StatelessWidget {
 }
 
 class Categorias extends StatefulWidget {
-  const Categorias({Key? key}) : super(key: key);
+  final value;
+  const Categorias({Key? key, required this.value}) : super(key: key);
 
   @override
   _CategoriasState createState() => _CategoriasState();
 }
 
 class _CategoriasState extends State<Categorias> {
-  static String? categoriaValue;
+  String? categoriaValue;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       value: categoriaValue,
-      items: [
-        "Manutenção",
-        "Sugestão de Melhoria",
-        "Evento"
-      ]
+      items: ["Manutenção", "Sugestão de Melhoria", "Evento"]
           .map((label) => DropdownMenuItem(
                 child: Text(label),
                 value: label,
@@ -88,8 +85,7 @@ class _CategoriasState extends State<Categorias> {
         setState(() {
           categoriaValue = value!;
           print(categoriaValue);
-        } );
-       ;
+        });
       },
     );
   }

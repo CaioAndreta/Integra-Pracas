@@ -137,11 +137,6 @@ class SideDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
-            onTap: () {},
-          ),
-          ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
             onTap: () async {

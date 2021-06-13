@@ -16,10 +16,12 @@ class _InfoPracaViewState extends State<InfoPracaView> {
   Widget build(BuildContext context) {
     final _firestore = FirebaseFirestore.instance;
     var id = ModalRoute.of(context)!.settings.arguments;
+    var docPraca =
+        _firestore.collection('pracas').where('id', isEqualTo: id).snapshots();
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Praça das flores',
+          '${docPraca}',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
@@ -27,7 +29,7 @@ class _InfoPracaViewState extends State<InfoPracaView> {
       ),
       body: Column(
         children: [
-          Image.asset('assets/praca.png'),
+          Image.asset('assets/${id}_1.png'),
           SizedBox(
               height: 100,
               width: double.infinity,
@@ -55,6 +57,7 @@ class _InfoPracaViewState extends State<InfoPracaView> {
                     stream: _firestore
                         .collection('comentarios')
                         .where('praca', isEqualTo: id)
+                        .orderBy('time', descending: true)
                         .snapshots(),
                     builder: (_, snapshot) {
                       if (!snapshot.hasData) {
@@ -69,7 +72,6 @@ class _InfoPracaViewState extends State<InfoPracaView> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  CircleAvatar(),
                                   SizedBox(width: 20),
                                   Expanded(
                                     child: Container(
@@ -80,7 +82,8 @@ class _InfoPracaViewState extends State<InfoPracaView> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(doc['usuario']),
-                                            Text(doc['comentario'])
+                                            Text(doc['comentario']),
+                                            Text(doc['categoria'])
                                           ]),
                                     ),
                                   )
