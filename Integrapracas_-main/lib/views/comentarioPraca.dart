@@ -90,3 +90,10 @@ class _CategoriasState extends State<Categorias> {
     );
   }
 }
+
+class ValueCategoria extends ChangeNotifier {
+  String? categoriaValue;
+
+  String? get getCategoriaValue => this.categoriaValue;
+  set setCategoriaValue(String? categoriaValue) => this.categoriaValue = categoriaValue;
+}

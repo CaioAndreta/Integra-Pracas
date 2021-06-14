@@ -40,7 +40,6 @@ class RedefinirSenha extends StatelessWidget {
                   onPressed: () {
                       
                     }
-                  },
                 ),
               ],
             ),
