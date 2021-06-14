@@ -6,6 +6,7 @@ import 'package:integrapracas/views/infoPraca.dart';
 import 'package:integrapracas/views/listaPracas.dart';
 import 'package:integrapracas/views/login.dart';
 import 'package:integrapracas/views/redefSenha.dart';
+import 'package:integrapracas/views/userComments.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -21,7 +22,8 @@ class App extends StatelessWidget {
           '/redefinir-senha': (context) => RedefinirSenha(),
           '/pracas': (context) => ListaPracas(),
           '/addcomment': (context) => ComentarioPraca(),
-          '/comments': (context) => InfoPracaView()
+          '/comments': (context) => InfoPracaView(),
+          '/my-comments': (context) => UserComments()
         },
       ),
     );

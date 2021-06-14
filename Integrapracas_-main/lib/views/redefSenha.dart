@@ -36,9 +36,10 @@ class RedefinirSenha extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue, padding: EdgeInsets.all(30)),
                   child: const Text('Redefinir senha'),
-                  onPressed: () {
-                    firebaseAuth.sendPasswordResetEmail(
+                  onPressed: () async {
+                    await firebaseAuth.sendPasswordResetEmail(
                         email: redefineSenha.text.trim());
+                    Navigator.of(context).pop();
                   },
                 ),
               ],

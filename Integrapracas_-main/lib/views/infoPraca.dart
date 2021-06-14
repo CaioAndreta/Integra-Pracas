@@ -36,7 +36,8 @@ class _InfoPracaViewState extends State<InfoPracaView> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/addcomment', arguments: dadosPraca.id);
+                  Navigator.of(context)
+                      .pushNamed('/addcomment', arguments: dadosPraca.id);
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,39 +53,57 @@ class _InfoPracaViewState extends State<InfoPracaView> {
               )),
           Expanded(
             child: Container(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                decoration: BoxDecoration(color: Colors.grey.shade900),
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: StreamBuilder<QuerySnapshot>(
-                  
                     stream: _firestore
                         .collection('comentarios')
                         .where('praca', isEqualTo: dadosPraca.id)
-                        //.orderBy('timestemp')
                         .snapshots(),
                     builder: (_, snapshot) {
                       if (!snapshot.hasData) {
-                        return Text('Ainda não há comentários para essa praça');
+                        return Center(
+                            heightFactor: double.infinity,
+                            widthFactor: double.infinity,
+                            child: CircularProgressIndicator());
                       }
                       return ListView.builder(
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (_, index) {
                             var doc = snapshot.data!.docs[index];
-                            return Container(
-                              height: 100,
+                            var categoria = doc['categoria'];
+                            return Card(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SizedBox(width: 20),
                                   Expanded(
                                     child: Container(
+                                      padding: EdgeInsets.all(10),
                                       child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(doc['usuario']),
-                                            Text(doc['comentario']),
-                                            Text(doc['categoria'])
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  child: Text(doc['usuario'],
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                                Container(
+                                                    child: Text(categoria))
+                                              ],
+                                            ),
+                                            SizedBox(height: 15),
+                                            Container(
+                                                child: Text(doc['comentario'])),
                                           ]),
                                     ),
                                   )

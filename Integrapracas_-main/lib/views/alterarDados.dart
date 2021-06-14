@@ -7,12 +7,13 @@ class AlterarDadosView extends StatefulWidget {
   _AlterarDadosViewState createState() => _AlterarDadosViewState();
 }
 
-class _AlterarDadosViewState extends State<AlterarDadosView>{
+class _AlterarDadosViewState extends State<AlterarDadosView> {
   final auth = FirebaseAuth.instance;
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController(text:'${FirebaseAuth.instance.currentUser?.email}');
-  final usuarioController = TextEditingController(text:'${FirebaseAuth.instance.currentUser?.displayName}' );
-  
+  final emailController = TextEditingController(
+      text: '${FirebaseAuth.instance.currentUser?.email}');
+  final usuarioController = TextEditingController(
+      text: '${FirebaseAuth.instance.currentUser?.displayName}');
 
   // @override
   // void dispose() {
@@ -41,6 +42,19 @@ class _AlterarDadosViewState extends State<AlterarDadosView>{
                     InputNome(controller: usuarioController),
                     SizedBox(height: 10),
                     InputEmail(controller: emailController),
+                    SizedBox(height: 10),
+                    Container(alignment: Alignment.centerLeft, child: Text('Para alterar sua senha, clique no botão abaixo:')),
+                    SizedBox(height: 3),
+                    Container(
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          child: Text('Alterar Senha'),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/redefinir-senha');
+                          }),
+                    ),
+                    SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -74,14 +88,14 @@ class _AlterarDadosViewState extends State<AlterarDadosView>{
         child: const Text('Confirmar'),
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            
             ScaffoldMessenger.of(context)
               ..removeCurrentSnackBar()
               ..showSnackBar(SnackBar(
                 content: Text('Alterações efetuadas com sucesso!'),
               ));
             auth.currentUser!.updateEmail(emailController.text);
-            auth.currentUser!.updateDisplayName(usuarioController.text.toUpperCase());
+            auth.currentUser!
+                .updateDisplayName(usuarioController.text.toUpperCase());
             Navigator.of(context).pushNamed('/pracas');
           }
         });
@@ -147,7 +161,6 @@ class _InputEmailState extends State<InputEmail> {
         Container(alignment: Alignment.centerLeft, child: Text('Email:')),
         SizedBox(height: 3),
         TextFormField(
-         
           controller: widget.controller,
           keyboardType: TextInputType.emailAddress,
           decoration:
@@ -166,6 +179,46 @@ class _InputEmailState extends State<InputEmail> {
   }
 }
 
+class InputSenha extends StatefulWidget {
+  final TextEditingController controller;
+
+  const InputSenha({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  _InputSenhaState createState() => _InputSenhaState();
+}
+
+class _InputSenhaState extends State<InputSenha> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(alignment: Alignment.centerLeft, child: Text('Senha:')),
+        SizedBox(height: 3),
+        Center(
+          child: TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), hintText: 'Senha'),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Insira uma senha';
+              } else if (value.length < 6) {
+                return 'A senha deve ter mais de 6 caracteres';
+              }
+              return null;
+            },
+            controller: widget.controller,
+          ),
+        )
+      ],
+    );
+  }
+}
+
 class BotaoVoltar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -178,8 +231,7 @@ class BotaoVoltar extends StatelessWidget {
         'Voltar',
         style: TextStyle(color: Colors.black87),
       ),
-      onPressed: () {
-      },
+      onPressed: () {},
     );
   }
 }

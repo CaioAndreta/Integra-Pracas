@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:integrapracas/models/usuario.dart';
-import 'package:integrapracas/views/cadastro.dart';
-import 'package:integrapracas/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ComentarioPraca extends StatelessWidget {

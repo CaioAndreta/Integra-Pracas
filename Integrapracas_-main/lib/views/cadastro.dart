@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:integrapracas/views/login.dart';
 
 class CadastroView extends StatefulWidget {
   @override
@@ -54,7 +53,7 @@ class _CadastroViewState extends State<CadastroView> {
                     SizedBox(height: 10),
                     InputSenha(controller: senhaController),
                     SizedBox(height: 10),
-                    InputConfirmarSenha(),
+                    InputConfirmarSenha(controller: senhaConfirmController),
                     SizedBox(height: 10),
                     Termos(),
                     Row(
@@ -105,9 +104,11 @@ class _CadastroViewState extends State<CadastroView> {
 class InputNome extends StatefulWidget {
   final TextEditingController controller;
 
-  const InputNome({Key? key,
-  required this.controller,})  : super(key: key);
-  
+  const InputNome({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
   @override
   _InputNomeState createState() => _InputNomeState();
 }
@@ -143,7 +144,7 @@ class InputSenha extends StatefulWidget {
   const InputSenha({
     Key? key,
     required this.controller,
-    }) : super(key: key);
+  }) : super(key: key);
 
   @override
   _InputSenhaState createState() => _InputSenhaState();
@@ -178,7 +179,9 @@ class _InputSenhaState extends State<InputSenha> {
 }
 
 class InputConfirmarSenha extends StatefulWidget {
-  const InputConfirmarSenha({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const InputConfirmarSenha({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   _InputConfirmarSenhaState createState() => _InputConfirmarSenhaState();
@@ -195,16 +198,15 @@ class _InputConfirmarSenhaState extends State<InputConfirmarSenha> {
         SizedBox(height: 3),
         Center(
             child: TextFormField(
-                controller: _CadastroViewState().senhaConfirmController,
+                controller: widget.controller,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Confirmação da senha'),
-                validator: (value) {
-                  if (_CadastroViewState().senhaController.text !=
-                      value) {
-                    return 'As senhas não são iguais';
-                  }
+                validator: (confirmaSenha) {
+                  // if (_CadastroViewState().senhaController.text != _CadastroViewState().senhaConfirmController.text) {
+                  //   return 'As senhas não são iguais';
+                  // }
                   return null;
                 })),
       ],

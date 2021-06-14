@@ -165,8 +165,14 @@ class SideDrawer extends StatelessWidget {
                           Navigator.of(context).pushNamed('/edita');
                         }),
                     ListTile(
+                        leading: Icon(Icons.chat_bubble),
+                        title: Text('Meus Comentários'),
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/my-comments');
+                        }),
+                    ListTile(
                       leading: Icon(Icons.exit_to_app),
-                      title: Text('Logout'),
+                      title: Text('Sair'),
                       onTap: () async {
                         await FirebaseAuth.instance.signOut();
                         Navigator.of(context).pushNamed('/');
@@ -175,12 +181,46 @@ class SideDrawer extends StatelessWidget {
                   ],
                 ),
                 ListTile(
-              leading: Icon(Icons.edit),
-              title: Text('Apagar conta'),
-              onTap: () async {
-                await auth.currentUser!.delete();
-                Navigator.of(context).pushNamed('/');
-              })
+                    leading: Icon(
+                      Icons.delete_forever,
+                      color: Colors.red.shade400,
+                    ),
+                    title: Text('Apagar conta',
+                        style: TextStyle(color: Colors.red.shade400)),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                                title: Text(
+                                    'Tem certeza que deseja apagar a sua conta? Todos os seus dados serão perdidos.',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16)),
+                                actions: [
+                                  TextButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        'Não',
+                                        style: TextStyle(color: Colors.black),
+                                      )),
+                                  TextButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white),
+                                      onPressed: () async {
+                                        await auth.currentUser!.delete();
+                                        Navigator.of(context).pushNamed('/');
+                                        ;
+                                      },
+                                      child: Text('Sim, tenho certeza',
+                                          style: TextStyle(
+                                              color: Colors.red.shade400)))
+                                ],
+                              ));
+                    })
               ],
             ),
           ),
