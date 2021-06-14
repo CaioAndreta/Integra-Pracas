@@ -3,22 +3,21 @@ import 'package:flutter/material.dart';
 
 class RedefinirSenha extends StatelessWidget {
   const RedefinirSenha({Key? key}) : super(key: key);
-  
 
   @override
   Widget build(BuildContext context) {
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final redefineSenha = new TextEditingController();
+    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    final redefineSenha = new TextEditingController();
 
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title:
-              Text('Redefinir a Senha', style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.white,
-          leading: BackButton(color: Colors.black),
-        ),
-        body: Column(children: [
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Redefinir a Senha', style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.black),
+      ),
+      body: Column(
+        children: [
           Container(
             padding: EdgeInsets.all(50),
             child: Column(
@@ -38,12 +37,15 @@ class RedefinirSenha extends StatelessWidget {
                       primary: Colors.blue, padding: EdgeInsets.all(30)),
                   child: const Text('Redefinir senha'),
                   onPressed: () {
-                      
-                    }
+                    firebaseAuth.sendPasswordResetEmail(
+                        email: redefineSenha.text.trim());
+                  },
                 ),
               ],
             ),
-          )
-        ]));
+          ),
+        ],
+      ),
+    );
   }
 }

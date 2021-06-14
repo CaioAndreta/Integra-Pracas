@@ -149,13 +149,23 @@ class SideDrawer extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-            onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushNamed('/');
-            },
+          Column(
+            children: [
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Editar Dados'),
+                onTap: () async{
+                }
+              ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Logout'),
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushNamed('/');
+                },
+              )
+            ],
           ),
         ],
       ),
