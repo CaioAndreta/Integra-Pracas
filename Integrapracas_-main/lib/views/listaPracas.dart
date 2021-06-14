@@ -47,7 +47,10 @@ class _ListaPracasState extends State<ListaPracas> {
             stream: _firestore.collection('pracas').orderBy('nome').snapshots(),
             builder: (_, snapshot) {
               if (!snapshot.hasData) {
-                return Text('Loading');
+                return Center(
+                    heightFactor: double.infinity,
+                    widthFactor: double.infinity,
+                    child: CircularProgressIndicator());
               }
               return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
@@ -61,8 +64,8 @@ class _ListaPracasState extends State<ListaPracas> {
                         onTap: () {
                           var nomePraca = doc['nome'];
                           var idPraca = doc.id;
-                          Navigator.of(context)
-                              .pushNamed('/comments', arguments: Praca(id: idPraca, nome: nomePraca));
+                          Navigator.of(context).pushNamed('/comments',
+                              arguments: Praca(id: idPraca, nome: nomePraca));
                         },
                         child: Card(
                           elevation: 5,
@@ -149,23 +152,37 @@ class SideDrawer extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.edit),
-                title: Text('Editar Dados'),
-                onTap: () async{
-                }
-              ),
-              ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: Text('Logout'),
-                onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushNamed('/');
-                },
-              )
-            ],
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    ListTile(
+                        leading: Icon(Icons.edit),
+                        title: Text('Editar Dados'),
+                        onTap: () async {
+                          Navigator.of(context).pushNamed('/edita');
+                        }),
+                    ListTile(
+                      leading: Icon(Icons.exit_to_app),
+                      title: Text('Logout'),
+                      onTap: () async {
+                        await FirebaseAuth.instance.signOut();
+                        Navigator.of(context).pushNamed('/');
+                      },
+                    )
+                  ],
+                ),
+                ListTile(
+              leading: Icon(Icons.edit),
+              title: Text('Apagar conta'),
+              onTap: () async {
+                await auth.currentUser!.delete();
+                Navigator.of(context).pushNamed('/');
+              })
+              ],
+            ),
           ),
         ],
       ),

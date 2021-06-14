@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:integrapracas/models/usuario.dart';
 import 'package:integrapracas/views/cadastro.dart';
 import 'package:integrapracas/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ComentarioPraca extends StatelessWidget {
   const ComentarioPraca({Key? key}) : super(key: key);
@@ -48,7 +49,10 @@ class ComentarioPraca extends StatelessWidget {
                     onPressed: () {
                       db.collection('comentarios').add({
                         'usuario': user!.displayName,
-                        'categoria': '',
+                        'userid': user.uid,
+                        'categoria':
+                            Provider.of<ValueCategoria>(context, listen: false)
+                                .getCategoriaValue,
                         'comentario': comentarioPraca.text,
                         'praca': id,
                         'timestamp': Timestamp.now()
@@ -74,7 +78,8 @@ class _CategoriasState extends State<Categorias> {
   Widget build(BuildContext context) {
     String? categoriaValue;
     return DropdownButtonFormField<String>(
-      value: categoriaValue,
+      value:
+          Provider.of<ValueCategoria>(context, listen: false).getCategoriaValue,
       items: ["Manutenção", "Sugestão de Melhoria", "Evento"]
           .map((label) => DropdownMenuItem(
                 child: Text(label),
@@ -82,9 +87,10 @@ class _CategoriasState extends State<Categorias> {
               ))
           .toList(),
       onChanged: (value) {
+        Provider.of<ValueCategoria>(context, listen: false)
+            .setCategoriaValue(value);
         setState(() {
           categoriaValue = value!;
-          print(categoriaValue);
         });
       },
     );
@@ -95,5 +101,9 @@ class ValueCategoria extends ChangeNotifier {
   String? categoriaValue;
 
   String? get getCategoriaValue => this.categoriaValue;
-  set setCategoriaValue(String? categoriaValue) => this.categoriaValue = categoriaValue;
+
+  void setCategoriaValue(String? value) {
+    this.categoriaValue = value;
+    notifyListeners();
+  }
 }

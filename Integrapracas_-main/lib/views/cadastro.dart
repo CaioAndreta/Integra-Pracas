@@ -202,7 +202,7 @@ class _InputConfirmarSenhaState extends State<InputConfirmarSenha> {
                     hintText: 'Confirmação da senha'),
                 validator: (value) {
                   if (_CadastroViewState().senhaController.text !=
-                      _CadastroViewState().senhaConfirmController.text) {
+                      value) {
                     return 'As senhas não são iguais';
                   }
                   return null;
