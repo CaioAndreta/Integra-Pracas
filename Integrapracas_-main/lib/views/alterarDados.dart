@@ -62,7 +62,7 @@ class _AlterarDadosViewState extends State<AlterarDadosView> {
                       child: ElevatedButton(
                           child: Text('Alterar Senha'),
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/redefinir-senha');
+                            Navigator.of(context).pushNamed('/alteraSenha');
                           }),
                     ),
                   ],
@@ -234,7 +234,7 @@ class BotaoVoltar extends StatelessWidget {
         style: TextStyle(color: Colors.black87),
       ),
       onPressed: () {
-        Navigator.of(context).pop();
+        Navigator.of(context).pushNamed('/pracas');
       },
     );
   }

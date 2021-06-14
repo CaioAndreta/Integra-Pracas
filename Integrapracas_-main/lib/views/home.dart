@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integrapracas/views/alterarDados.dart';
+import 'package:integrapracas/views/alterarSenha.dart';
 import 'package:integrapracas/views/cadastro.dart';
 import 'package:integrapracas/views/comentarioPraca.dart';
 import 'package:integrapracas/views/infoPraca.dart';
@@ -34,6 +35,7 @@ class App extends StatelessWidget {
           '/cadastro': (context) => CadastroView(),
           '/edita': (context) => AlterarDadosView(),
           '/redefinir-senha': (context) => RedefinirSenha(),
+          '/alteraSenha':(context) => AlteraSenha(),
           '/pracas': (context) => ListaPracas(),
           '/addcomment': (context) => ComentarioPraca(),
           '/comments': (context) => InfoPracaView(),

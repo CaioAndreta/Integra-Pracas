@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:integrapracas/views/login.dart';
 
 class CadastroView extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _CadastroViewState extends State<CadastroView> {
   final emailconfirmcontroller = new TextEditingController();
   final usuarioController = new TextEditingController();
   final senhaController = new TextEditingController();
+  final senhaConfirmController = new TextEditingController();
   final firebaseAuth = FirebaseAuth.instance;
 
   void cadastroUser() async {
@@ -82,6 +84,7 @@ class _CadastroViewState extends State<CadastroView> {
   Widget botaoConfirmar() {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
+            primary: Colors.blue,
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20)),
         child: const Text('Confirmar'),
         onPressed: () {
@@ -92,6 +95,7 @@ class _CadastroViewState extends State<CadastroView> {
               ..showSnackBar(SnackBar(
                 content: Text('Cadastro efetuado com sucesso!'),
               ));
+            
             Navigator.of(context).pushNamed('/');
           }
         });
@@ -101,11 +105,9 @@ class _CadastroViewState extends State<CadastroView> {
 class InputNome extends StatefulWidget {
   final TextEditingController controller;
 
-  const InputNome({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
-
+  const InputNome({Key? key,
+  required this.controller,})  : super(key: key);
+  
   @override
   _InputNomeState createState() => _InputNomeState();
 }
@@ -141,7 +143,7 @@ class InputSenha extends StatefulWidget {
   const InputSenha({
     Key? key,
     required this.controller,
-  }) : super(key: key);
+    }) : super(key: key);
 
   @override
   _InputSenhaState createState() => _InputSenhaState();
@@ -176,9 +178,7 @@ class _InputSenhaState extends State<InputSenha> {
 }
 
 class InputConfirmarSenha extends StatefulWidget {
-  final TextEditingController controller;
-  const InputConfirmarSenha({Key? key, required this.controller})
-      : super(key: key);
+  const InputConfirmarSenha({Key? key}) : super(key: key);
 
   @override
   _InputConfirmarSenhaState createState() => _InputConfirmarSenhaState();
@@ -195,15 +195,16 @@ class _InputConfirmarSenhaState extends State<InputConfirmarSenha> {
         SizedBox(height: 3),
         Center(
             child: TextFormField(
-                controller: widget.controller,
+                controller: _CadastroViewState().senhaConfirmController,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Confirmação da senha'),
-                validator: (confirmaSenha) {
-                  // if (_CadastroViewState().senhaController.text != _CadastroViewState().senhaConfirmController.text) {
-                  //   return 'As senhas não são iguais';
-                  // }
+                validator: (value) {
+                  if (_CadastroViewState().senhaController.text !=
+                      _CadastroViewState().senhaConfirmController.text) {
+                    return 'As senhas não são iguais';
+                  }
                   return null;
                 })),
       ],
@@ -254,13 +255,12 @@ class BotaoVoltar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-        side: BorderSide(color: Color(0XFF7A9337)),
-      ),
+          primary: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          side: BorderSide(color: Colors.black)),
       child: Text(
         'Voltar',
-        style: TextStyle(color: Color(0XFF7A9337)),
+        style: TextStyle(color: Colors.black87),
       ),
       onPressed: () {
         Navigator.of(context).pushNamed('/');

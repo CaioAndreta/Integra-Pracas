@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
-class CadastroView extends StatefulWidget {
+class AlteraSenha extends StatefulWidget {
   @override
-  _CadastroViewState createState() => _CadastroViewState();
+  _AlteraSenhaState createState() => _AlteraSenhaState();
 }
 
-class _CadastroViewState extends State<CadastroView> {
+class _AlteraSenhaState extends State<AlteraSenha> {
   final formKey = GlobalKey<FormState>();
   final senhaController = new TextEditingController();
   final senhaConfirmController = new TextEditingController();
@@ -69,7 +69,7 @@ class _CadastroViewState extends State<CadastroView> {
               ..showSnackBar(SnackBar(
                 content: Text('Senha alterada com sucesso!'),
               ));
-            Navigator.of(context).pushNamed('/');
+            Navigator.of(context).pushNamed('/pracas');
           }
         });
   }
@@ -128,7 +128,7 @@ class BotaoVoltar extends StatelessWidget {
         style: TextStyle(color: Colors.black87),
       ),
       onPressed: () {
-        Navigator.of(context).pushNamed('/');
+        Navigator.of(context).pushNamed('/edita');
       },
     );
   }

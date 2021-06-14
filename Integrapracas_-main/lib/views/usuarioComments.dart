@@ -45,7 +45,9 @@ class UserComments extends StatelessWidget {
                                   caption: 'Apagar',
                                   icon: Icons.delete,
                                   color: Colors.red,
-                                  onTap: () {},
+                                  onTap: () {
+                                    _firestore.collection("comentarios").doc(doc.id).delete();
+                                  },
                                 )
                               ],
                               child: Card(
