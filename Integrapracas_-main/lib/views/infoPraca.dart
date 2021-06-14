@@ -18,14 +18,11 @@ class _InfoPracaViewState extends State<InfoPracaView> {
     var dadosPraca = ModalRoute.of(context)!.settings.arguments as Praca;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(
           '${dadosPraca.nome}',
-          // _firestore.collection("pracas").doc("${id}").toString(),
-          style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
       ),
       body: Column(
         children: [
@@ -34,10 +31,13 @@ class _InfoPracaViewState extends State<InfoPracaView> {
               height: 100,
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.white),
+                style: ElevatedButton.styleFrom(
+                  elevation: 3,
+                  primary: Color(0xFFF5F1E0),
+                ),
                 onPressed: () {
                   Navigator.of(context)
-                      .pushNamed('/addcomment', arguments: dadosPraca.id);
+                      .pushNamed('/addcomment', arguments: dadosPraca);
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +53,7 @@ class _InfoPracaViewState extends State<InfoPracaView> {
               )),
           Expanded(
             child: Container(
-                decoration: BoxDecoration(color: Colors.grey.shade900),
+                decoration: BoxDecoration(color: Color(0xFFF5F1E0)),
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: StreamBuilder<QuerySnapshot>(
                     stream: _firestore

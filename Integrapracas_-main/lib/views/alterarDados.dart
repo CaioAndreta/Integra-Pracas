@@ -25,6 +25,7 @@ class _AlterarDadosViewState extends State<AlterarDadosView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
       child: Form(
         key: formKey,
@@ -45,15 +46,7 @@ class _AlterarDadosViewState extends State<AlterarDadosView> {
                     SizedBox(height: 10),
                     Container(alignment: Alignment.centerLeft, child: Text('Para alterar sua senha, clique no botão abaixo:')),
                     SizedBox(height: 3),
-                    Container(
-                      height: 50,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          child: Text('Alterar Senha'),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/redefinir-senha');
-                          }),
-                    ),
+                    
                     SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,6 +54,16 @@ class _AlterarDadosViewState extends State<AlterarDadosView> {
                         BotaoVoltar(),
                         botaoConfirmar(),
                       ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      height: 80,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          child: Text('Alterar Senha'),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/redefinir-senha');
+                          }),
                     ),
                   ],
                 ),
@@ -83,7 +86,6 @@ class _AlterarDadosViewState extends State<AlterarDadosView> {
   Widget botaoConfirmar() {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20)),
         child: const Text('Confirmar'),
         onPressed: () {
@@ -231,7 +233,9 @@ class BotaoVoltar extends StatelessWidget {
         'Voltar',
         style: TextStyle(color: Colors.black87),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
     );
   }
 }

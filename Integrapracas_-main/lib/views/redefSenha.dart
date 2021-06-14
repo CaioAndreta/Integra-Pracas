@@ -10,11 +10,11 @@ class RedefinirSenha extends StatelessWidget {
     final redefineSenha = new TextEditingController();
 
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Redefinir a Senha', style: TextStyle(color: Colors.black)),
-        backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
+        title: Text('Redefinir a Senha'),
+        leading: BackButton(),
       ),
       body: Column(
         children: [
@@ -25,7 +25,10 @@ class RedefinirSenha extends StatelessWidget {
               children: [
                 Container(
                     child: Text(
-                        'Insira o email da sua conta para redefinir a senha. Enviaremos uma confirmação para verificar se o dono da conta solicitou a mudança.')),
+                  'Insira o email da sua conta para redefinir a senha. Enviaremos uma confirmação para verificar se o dono da conta solicitou a mudança.',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(fontSize: 16),
+                )),
                 SizedBox(height: 8),
                 TextFormField(
                     controller: redefineSenha,
@@ -33,8 +36,7 @@ class RedefinirSenha extends StatelessWidget {
                         border: OutlineInputBorder(), hintText: 'Email')),
                 SizedBox(height: 50),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blue, padding: EdgeInsets.all(30)),
+                  style: ElevatedButton.styleFrom(padding: EdgeInsets.all(30)),
                   child: const Text('Redefinir senha'),
                   onPressed: () async {
                     await firebaseAuth.sendPasswordResetEmail(

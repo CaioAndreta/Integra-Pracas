@@ -30,14 +30,14 @@ class _ListaPracasState extends State<ListaPracas> {
   Widget build(BuildContext context) {
     final _firestore = FirebaseFirestore.instance;
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         key: _scaffoldKey,
         drawer: SideDrawer(),
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Praças', style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.white,
+          title: Text('Praças'),
           leading: IconButton(
-            icon: Icon(Icons.menu, color: Colors.black),
+            icon: Icon(Icons.menu),
             onPressed: () {
               _scaffoldKey.currentState!.openDrawer();
             },
@@ -149,7 +149,7 @@ class SideDrawer extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Color(0xFF3D3129),
             ),
           ),
           Expanded(
@@ -194,8 +194,7 @@ class SideDrawer extends StatelessWidget {
                                 title: Text(
                                     'Tem certeza que deseja apagar a sua conta? Todos os seus dados serão perdidos.',
                                     style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16)),
+                                        color: Colors.black, fontSize: 16)),
                                 actions: [
                                   TextButton(
                                       style: ElevatedButton.styleFrom(

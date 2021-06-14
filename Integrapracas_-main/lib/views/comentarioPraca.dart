@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:integrapracas/models/praca.dart';
 import 'package:provider/provider.dart';
 
 class ComentarioPraca extends StatelessWidget {
@@ -12,14 +13,14 @@ class ComentarioPraca extends StatelessWidget {
     final user = auth.currentUser;
     var db = FirebaseFirestore.instance;
     var comentarioPraca = new TextEditingController();
-    var id = ModalRoute.of(context)!.settings.arguments;
+    var dadosPraca = ModalRoute.of(context)!.settings.arguments as Praca;
 
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Praças', style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.white,
-          leading: BackButton(color: Colors.black),
+          title: Text('Adicionar Comentário'),
+          leading: BackButton(),
         ),
         body: Column(children: [
           Container(
@@ -40,8 +41,8 @@ class ComentarioPraca extends StatelessWidget {
                     decoration: InputDecoration(border: OutlineInputBorder())),
                 SizedBox(height: 80),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.blue, padding: EdgeInsets.all(30)),
+                    style:
+                        ElevatedButton.styleFrom(padding: EdgeInsets.all(30)),
                     child: const Text('Adicionar Comentário'),
                     onPressed: () {
                       db.collection('comentarios').add({
@@ -51,8 +52,9 @@ class ComentarioPraca extends StatelessWidget {
                             Provider.of<ValueCategoria>(context, listen: false)
                                 .getCategoriaValue,
                         'comentario': comentarioPraca.text,
-                        'praca': id,
-                        'timestamp': Timestamp.now()
+                        'praca': dadosPraca.id,
+                        'timestamp': Timestamp.now(),
+                        'nomePraca': dadosPraca.nome
                       });
                       Navigator.pop(context);
                     }),

@@ -18,75 +18,76 @@ class LoginView extends StatelessWidget {
     }
 
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         // appBar: AppBar(title: Text('Cadastro')),
         body: SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              child: Image.asset('logoIntegraPracas.png'),
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: new EdgeInsets.fromLTRB(50, 0, 50, 0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    InputEmail(controller: emailController),
-                    SizedBox(height: 20),
-                    InputSenha(controller: senhaController),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 25)),
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          realizaLogin(context);
-                        }
-                      },
-                      child: Text('Login'),
-                    ),
-                    SizedBox(height: 10),
-                    GestureDetector(
-                        onTap: () => {
-                          Navigator.of(context).pushNamed('/redefinir-senha')
-                        },
-                        child: Text('Esqueci minha senha',
-                            style: TextStyle(
-                                color: Colors.grey.shade600,
-                                decoration: TextDecoration.underline,
-                                fontSize: 18))),
-                    SizedBox(height: 15),
-                    Divider(thickness: 2),
-                    SizedBox(height: 30),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 70, vertical: 25),
-                          side: BorderSide(color: Colors.black)),
-                      child: Text(
-                        'Cadastre-se',
-                        style: TextStyle(color: Colors.black87),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/cadastro');
-                      },
-                    ),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Image.asset('logoIntegraPracas.png'),
                 ),
-              ),
+                SizedBox(height: 20),
+                Container(
+                  padding: new EdgeInsets.fromLTRB(50, 0, 50, 0),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        InputEmail(controller: emailController),
+                        SizedBox(height: 20),
+                        InputSenha(controller: senhaController),
+                        SizedBox(height: 20),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 25)),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              realizaLogin(context);
+                            }
+                          },
+                          child: Text('Login'),
+                        ),
+                        SizedBox(height: 10),
+                        GestureDetector(
+                            onTap: () => {
+                                  Navigator.of(context)
+                                      .pushNamed('/redefinir-senha')
+                                },
+                            child: Text('Esqueci minha senha',
+                                style: TextStyle(
+                                    color: Colors.grey.shade600,
+                                    decoration: TextDecoration.underline,
+                                    fontSize: 18))),
+                        SizedBox(height: 15),
+                        Divider(thickness: 2),
+                        SizedBox(height: 30),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 70, vertical: 25),
+                              side: BorderSide(color: Color(0XFF7A9337))),
+                          child: Text(
+                            'Cadastre-se',
+                            style: TextStyle(color: Color(0XFF7A9337)),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/cadastro');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   void realizaLogin(BuildContext context) async {

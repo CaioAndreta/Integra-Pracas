@@ -13,7 +13,6 @@ class _CadastroViewState extends State<CadastroView> {
   final emailconfirmcontroller = new TextEditingController();
   final usuarioController = new TextEditingController();
   final senhaController = new TextEditingController();
-  final senhaConfirmController = new TextEditingController();
   final firebaseAuth = FirebaseAuth.instance;
 
   void cadastroUser() async {
@@ -21,6 +20,7 @@ class _CadastroViewState extends State<CadastroView> {
         email: emailController.text, password: senhaController.text);
     final user = firebaseAuth.currentUser;
     user!.updateDisplayName(usuarioController.text.toUpperCase());
+    user.sendEmailVerification();
   }
 
   @override
@@ -53,8 +53,6 @@ class _CadastroViewState extends State<CadastroView> {
                     SizedBox(height: 10),
                     InputSenha(controller: senhaController),
                     SizedBox(height: 10),
-                    InputConfirmarSenha(controller: senhaConfirmController),
-                    SizedBox(height: 10),
                     Termos(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +82,6 @@ class _CadastroViewState extends State<CadastroView> {
   Widget botaoConfirmar() {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20)),
         child: const Text('Confirmar'),
         onPressed: () {
@@ -257,12 +254,13 @@ class BotaoVoltar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-          side: BorderSide(color: Colors.black)),
+        primary: Colors.white,
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+        side: BorderSide(color: Color(0XFF7A9337)),
+      ),
       child: Text(
         'Voltar',
-        style: TextStyle(color: Colors.black87),
+        style: TextStyle(color: Color(0XFF7A9337)),
       ),
       onPressed: () {
         Navigator.of(context).pushNamed('/');
