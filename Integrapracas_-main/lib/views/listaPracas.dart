@@ -73,7 +73,16 @@ class _ListaPracasState extends State<ListaPracas> {
                             children: [
                               Flexible(
                                 flex: 1,
-                                child: Image.asset('${doc.id}_1.png'),
+                                child: Container(
+                                  width: 200,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: AssetImage('${doc.id}_1.png'),
+                                        fit: BoxFit.fill),
+                                  ),
+                                ),
                               ),
                               Flexible(
                                 flex: 1,
@@ -84,11 +93,15 @@ class _ListaPracasState extends State<ListaPracas> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(height: 20),
-                                      Center(
-                                        child: Text(doc['nome'],
-                                            style: TextStyle(
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.bold)),
+                                      Container(
+                                        padding:
+                                            EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                        child: Center(
+                                          child: Text(doc['nome'],
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
                                       ),
                                       Text('A 5Km',
                                           style: TextStyle(fontSize: 18.0)),
@@ -135,10 +148,12 @@ class SideDrawer extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  Text(
-                    '${auth.currentUser?.displayName}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  Container(
+                    child: Text(
+                      '${auth.currentUser?.displayName}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
                   ),
                   Text(
                     '${auth.currentUser?.email}',

@@ -38,7 +38,13 @@ class ComentarioPraca extends StatelessWidget {
                 TextFormField(
                     controller: comentarioPraca,
                     maxLines: 5,
-                    decoration: InputDecoration(border: OutlineInputBorder())),
+                    decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        focusColor: Color(0XFF7A9337),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0XFFBBCC8F), width: 2.0)))),
                 SizedBox(height: 80),
                 ElevatedButton(
                     style:

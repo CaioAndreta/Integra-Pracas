@@ -25,54 +25,56 @@ class _AlterarDadosViewState extends State<AlterarDadosView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
-      child: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              tituloAlterarDados(),
-              Container(
-                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InputNome(controller: usuarioController),
-                    SizedBox(height: 10),
-                    InputEmail(controller: emailController),
-                    SizedBox(height: 10),
-                    Container(alignment: Alignment.centerLeft, child: Text('Para alterar sua senha, clique no botão abaixo:')),
-                    SizedBox(height: 3),
-                    
-                    SizedBox(height: 40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Form(
+            key: formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  tituloAlterarDados(),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        BotaoVoltar(),
-                        botaoConfirmar(),
+                        InputNome(controller: usuarioController),
+                        SizedBox(height: 10),
+                        InputEmail(controller: emailController),
+                        SizedBox(height: 40),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BotaoVoltar(),
+                            botaoConfirmar(),
+                          ],
+                        ),
+                        SizedBox(height: 50),
+                        Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                                'Para alterar sua senha, clique no botão abaixo:')),
+                        SizedBox(height: 3),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                          height: 80,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                              child: Text('Alterar Senha'),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/alteraSenha');
+                              }),
+                        ),
                       ],
                     ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                      height: 80,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          child: Text('Alterar Senha'),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/alteraSenha');
-                          }),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Widget tituloAlterarDados() {
@@ -127,7 +129,14 @@ class _InputNomeState extends State<InputNome> {
         Center(
             child: TextFormField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Nome'),
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Nome'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Insira um Nome';
@@ -165,8 +174,15 @@ class _InputEmailState extends State<InputEmail> {
         TextFormField(
           controller: widget.controller,
           keyboardType: TextInputType.emailAddress,
-          decoration:
-              InputDecoration(hintText: 'Email', border: OutlineInputBorder()),
+          decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Email'),
           validator: (email) {
             if ((email!.isEmpty)) {
               return 'Insira um email';
@@ -203,8 +219,15 @@ class _InputSenhaState extends State<InputSenha> {
         Center(
           child: TextFormField(
             obscureText: true,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Senha'),
+           decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Senha'),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Insira uma senha';

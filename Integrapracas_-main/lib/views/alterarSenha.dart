@@ -16,36 +16,36 @@ class _AlteraSenhaState extends State<AlteraSenha> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
-      child: Form(
-        key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            tituloRegistro(),
-            Container(
-              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InputSenha(controller: senhaController),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                tituloRegistro(),
+                Container(
+                  padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      BotaoVoltar(),
-                      botaoConfirmar(),
+                      InputSenha(controller: senhaController),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BotaoVoltar(),
+                          botaoConfirmar(),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   Widget tituloRegistro() {
@@ -98,7 +98,14 @@ class _InputSenhaState extends State<InputSenha> {
           child: TextFormField(
             obscureText: true,
             decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Senha'),
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Senha'),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Insira uma senha';
@@ -128,7 +135,7 @@ class BotaoVoltar extends StatelessWidget {
         style: TextStyle(color: Colors.black87),
       ),
       onPressed: () {
-        Navigator.of(context).pushNamed('/edita');
+        Navigator.of(context).pop();
       },
     );
   }

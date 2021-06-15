@@ -98,6 +98,19 @@ class _InfoPracaViewState extends State<InfoPracaView> {
                                                               FontWeight.bold)),
                                                 ),
                                                 Container(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            10, 0, 10, 0),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            new BorderRadius
+                                                                    .all(
+                                                                Radius
+                                                                    .elliptical(
+                                                                        50,
+                                                                        50)),
+                                                        color:
+                                                            Colors.greenAccent),
                                                     child: Text(categoria))
                                               ],
                                             ),

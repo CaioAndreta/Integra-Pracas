@@ -33,7 +33,14 @@ class RedefinirSenha extends StatelessWidget {
                 TextFormField(
                     controller: redefineSenha,
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(), hintText: 'Email')),
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Email'),),
                 SizedBox(height: 50),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(padding: EdgeInsets.all(30)),

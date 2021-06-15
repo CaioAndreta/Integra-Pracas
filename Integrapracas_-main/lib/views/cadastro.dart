@@ -35,42 +35,42 @@ class _CadastroViewState extends State<CadastroView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
-      child: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              tituloRegistro(),
-              Container(
-                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InputNome(controller: usuarioController),
-                    SizedBox(height: 10),
-                    InputEmail(controller: emailController),
-                    SizedBox(height: 10),
-                    InputSenha(controller: senhaController),
-                    SizedBox(height: 10),
-                    Termos(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Form(
+            key: formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  tituloRegistro(),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        BotaoVoltar(),
-                        botaoConfirmar(),
+                        InputNome(controller: usuarioController),
+                        SizedBox(height: 10),
+                        InputEmail(controller: emailController),
+                        SizedBox(height: 10),
+                        InputSenha(controller: senhaController),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BotaoVoltar(),
+                            botaoConfirmar(),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Widget tituloRegistro() {
@@ -84,7 +84,6 @@ class _CadastroViewState extends State<CadastroView> {
   Widget botaoConfirmar() {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20)),
         child: const Text('Confirmar'),
         onPressed: () {
@@ -95,7 +94,7 @@ class _CadastroViewState extends State<CadastroView> {
               ..showSnackBar(SnackBar(
                 content: Text('Cadastro efetuado com sucesso!'),
               ));
-            
+
             Navigator.of(context).pushNamed('/');
           }
         });
@@ -105,9 +104,11 @@ class _CadastroViewState extends State<CadastroView> {
 class InputNome extends StatefulWidget {
   final TextEditingController controller;
 
-  const InputNome({Key? key,
-  required this.controller,})  : super(key: key);
-  
+  const InputNome({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
   @override
   _InputNomeState createState() => _InputNomeState();
 }
@@ -122,7 +123,14 @@ class _InputNomeState extends State<InputNome> {
         Center(
             child: TextFormField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Nome'),
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Nome'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Insira um Nome';
@@ -143,7 +151,7 @@ class InputSenha extends StatefulWidget {
   const InputSenha({
     Key? key,
     required this.controller,
-    }) : super(key: key);
+  }) : super(key: key);
 
   @override
   _InputSenhaState createState() => _InputSenhaState();
@@ -160,7 +168,14 @@ class _InputSenhaState extends State<InputSenha> {
           child: TextFormField(
             obscureText: true,
             decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Senha'),
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Senha'),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Insira uma senha';
@@ -198,8 +213,14 @@ class _InputConfirmarSenhaState extends State<InputConfirmarSenha> {
                 controller: _CadastroViewState().senhaConfirmController,
                 obscureText: true,
                 decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
                     border: OutlineInputBorder(),
-                    hintText: 'Confirmação da senha'),
+                    hintText: 'Confirmação de Senha'),
                 validator: (value) {
                   if (_CadastroViewState().senhaController.text !=
                       _CadastroViewState().senhaConfirmController.text) {
@@ -234,8 +255,15 @@ class _InputEmailState extends State<InputEmail> {
         TextFormField(
           controller: widget.controller,
           keyboardType: TextInputType.emailAddress,
-          decoration:
-              InputDecoration(hintText: 'Email', border: OutlineInputBorder()),
+          decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    focusColor: Color(0XFF7A9337),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0XFFBBCC8F), width: 2.0)),
+                    border: OutlineInputBorder(),
+                    hintText: 'Email'),
           validator: (email) {
             if ((email!.isEmpty)) {
               return 'Insira um email';
@@ -263,7 +291,7 @@ class BotaoVoltar extends StatelessWidget {
         style: TextStyle(color: Colors.black87),
       ),
       onPressed: () {
-        Navigator.of(context).pushNamed('/');
+        Navigator.of(context).pop();
       },
     );
   }
