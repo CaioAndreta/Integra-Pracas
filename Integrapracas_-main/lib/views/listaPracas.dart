@@ -103,8 +103,6 @@ class _ListaPracasState extends State<ListaPracas> {
                                                   fontWeight: FontWeight.bold)),
                                         ),
                                       ),
-                                      Text('A 5Km',
-                                          style: TextStyle(fontSize: 18.0)),
                                       Expanded(child: Container()),
                                       Container(
                                           padding:
